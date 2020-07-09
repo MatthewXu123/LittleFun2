@@ -9,15 +9,9 @@ package com.matthewxu.multithread;
 public class MultiThreadTest {
 
 	public static void main(String[] args) {
-		try {
-			MyThread myThread = new MyThread("A");
-			MyThread myThread2 = new MyThread("B");
-			MyThread myThread3 = new MyThread("C");
-			myThread.start();
-			myThread2.start();
-			myThread3.start();
-		} catch (Exception e) {
-		}
-		
+		MyThread myThread = new MyThread();
+		System.out.println(myThread.isAlive());
+		myThread.start();
+		System.out.println("start:" + myThread.isAlive());
 	}
 }
