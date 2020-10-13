@@ -1,4 +1,4 @@
-package com.matthewxu.getImagesFromUrlPatch;
+package com.matthewxu;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
