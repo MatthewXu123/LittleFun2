@@ -35,9 +35,13 @@ public class _143重排链表 {
 			head = head.next;
 		}
 		int length = list.size();
-		for(int i = 0; i < length / 2; i++){
-			list.get(i).next = list.get(length - 1 - i);
-			list.get(length - 1 - i).next = list.get(i + 1);
+		List<ListNode> list2 = new ArrayList<>();
+		for(int i = 0; i < length / 2;){
+			if(i % 2 == 0)
+				list2.add(list.get(i));
+			else
+				list2.add(list.get(length - 1 -i));
 		}
 	}
+	
 }
