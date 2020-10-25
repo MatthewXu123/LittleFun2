@@ -1,6 +1,6 @@
 package com.matthewxu.leetcode;
 
-public class _116填充每个节点的下一个右侧节点指针 {
+public class _0116填充每个节点的下一个右侧节点指针 {
 
 	// Definition for a Node.
 	class Node {

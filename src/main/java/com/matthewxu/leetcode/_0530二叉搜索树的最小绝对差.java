@@ -1,6 +1,6 @@
 package com.matthewxu.leetcode;
 
-public class _530二叉搜索树的最小绝对差 {
+public class _0530二叉搜索树的最小绝对差 {
 
 	static int pre;
     static int min;

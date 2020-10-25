@@ -10,7 +10,7 @@ import java.util.List;
  * @author Matthew Xu
  * @date Oct 20, 2020
  */
-public class _143重排链表 {
+public class _0143重排链表 {
 
 	public class ListNode {
 		int val;

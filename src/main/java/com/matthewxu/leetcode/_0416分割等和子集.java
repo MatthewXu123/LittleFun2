@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class _416分割等和子集 {
+public class _0416分割等和子集 {
 
 	public static boolean canPartition(int[] nums) {
 		int sum = 0;

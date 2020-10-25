@@ -3,7 +3,7 @@ package com.matthewxu.leetcode;
 import java.util.HashSet;
 import java.util.Set;
 
-public class _142环形链表2 {
+public class _0142环形链表2 {
 
 	public ListNode detectCycle(ListNode head) {
 		Set<ListNode> hashSet = new HashSet<>();

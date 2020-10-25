@@ -6,7 +6,7 @@ package com.matthewxu.leetcode;
  * @author Matthew Xu
  * @date Oct 19, 2020
  */
-public class _844比较含退格的字符串 {
+public class _0844比较含退格的字符串 {
 
 	public static boolean backspaceCompare(String S, String T) {
         if(S.equals(T) || S == T)

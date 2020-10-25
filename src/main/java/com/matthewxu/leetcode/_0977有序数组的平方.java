@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class _977有序数组的平方 {
+public class _0977有序数组的平方 {
 
 	public static int[] sortedSquares(int[] A) {
 		List<Integer> list = new ArrayList<>();

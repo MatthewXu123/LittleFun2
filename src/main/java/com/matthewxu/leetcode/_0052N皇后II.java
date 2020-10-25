@@ -3,7 +3,7 @@ package com.matthewxu.leetcode;
 import java.util.HashSet;
 import java.util.Set;
 
-public class _52N皇后II {
+public class _0052N皇后II {
 
 	public int totalNQueens(int n) {
         Set<Integer> columns = new HashSet<Integer>();

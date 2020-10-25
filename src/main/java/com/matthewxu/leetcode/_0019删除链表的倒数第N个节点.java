@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class _19删除链表的倒数第N个节点 {
+public class _0019删除链表的倒数第N个节点 {
 
 	public ListNode removeNthFromEnd(ListNode head, int n) {
 		if(head.next == null && n == 1)
