@@ -3,15 +3,12 @@ package com.matthewxu.excelhandle;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.hpsf.Array;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -25,24 +22,25 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
  */
 public class YonghuiIpUtil {
 
-	private static final String FILE_PATH = "";
+	private static final String FILE_PATH = "C:\\0AMatthewXu\\Files\\000WorkTemp\\2021\\0204-Yonghui\\List.xlsx";
 	
-	private List<Yonghui> onlineList = new ArrayList<>();
-	private List<Yonghui> offlineList = new ArrayList<>();
+	private static List<Yonghui> onlineList = new ArrayList<>();
+	private static List<Yonghui> offlineList = new ArrayList<>();
 	
 	@SuppressWarnings("resource")
-	private void getDataFromExcel() throws EncryptedDocumentException, IOException{
+	private static void getDataFromExcel() throws EncryptedDocumentException, IOException{
 		File file = new File(FILE_PATH);
 		FileInputStream fis = new FileInputStream(file);
 		Workbook workbook = WorkbookFactory.create(file);
 		Sheet sheet = workbook.getSheetAt(0);
 		int rowNum = sheet.getLastRowNum();
-		List<Yonghui> abnormalList = new ArrayList<>();
 		for(int i = 1; i < rowNum; i++){
 			Row row = sheet.getRow(i);
-			
+			String description = getStringFromCell(row.getCell(0));
+			if(StringUtils.isBlank(description))
+				continue;
 			Yonghui yonghui = new Yonghui();
-			yonghui.setDescription(getStringFromCell(row.getCell(0)));
+			yonghui.setDescription(description);
 			yonghui.setPreviousIP(getStringFromCell(row.getCell(1)));
 			yonghui.setCurrentIP(getStringFromCell(row.getCell(2)));
 			yonghui.setComment(getStringFromCell(row.getCell(4)));
@@ -60,15 +58,37 @@ public class YonghuiIpUtil {
 		
 	}
 	
-	private String getStringFromCell(Cell cell){
+	public static void main(String[] args) throws EncryptedDocumentException, IOException {
+		getDataFromExcel();
+		getOldToNewUpdateSqls();
+		//getNewToOldUpdateSqls();
+	}
+	
+	public static void getOldToNewUpdateSqls(){
+		for (Yonghui yonghui : onlineList) {
+			System.out.println(buildUpdateSql(yonghui.getCurrentIP(), yonghui.getPreviousIP()));
+		}
+	}
+	
+	public static void getNewToOldUpdateSqls(){
+		for (Yonghui yonghui : onlineList) {
+			System.out.println(buildUpdateSql(yonghui.getPreviousIP(), yonghui.getCurrentIP()));
+		}
+	}
+	
+	private static String buildUpdateSql(String oldOne, String newOne){
+		return "update public.cfsupervisors set ipaddress = '"+ oldOne +"' where ipaddress = '" + newOne + "';";
+	}
+	
+	private static String getStringFromCell(Cell cell){
 		return cell != null ? cell.toString() : "";
 	}
 	
-	private int getIntFromCell(Cell cell){
-		return cell != null ? Integer.valueOf(cell.toString()) : 0;
+	private static int getIntFromCell(Cell cell){
+		return cell != null ? Double.valueOf(cell.toString()).intValue() : 0;
 	}
 	
-	private class Yonghui{
+	private static class Yonghui{
 		private String description;
 		
 		private String previousIP;
@@ -117,6 +137,12 @@ public class YonghuiIpUtil {
 
 		public void setComment(String comment) {
 			this.comment = comment;
+		}
+
+		@Override
+		public String toString() {
+			return "Yonghui [description=" + description + ", previousIP=" + previousIP + ", currentIP=" + currentIP
+					+ ", isOnline=" + isOnline + ", comment=" + comment + "]";
 		}
 		
 	}
